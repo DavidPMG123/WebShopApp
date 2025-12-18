@@ -168,5 +168,14 @@ namespace WebShopApp.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public JsonResult HasOrders(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+                return Json(new { hasOrders = false });
+
+            bool hasOrders = _context.Orders.Any(o => o.UserId == userId);
+            return Json(new { hasOrders = hasOrders });
+        }
     }
 }
